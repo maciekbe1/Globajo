@@ -1,14 +1,12 @@
 import bcryptjs from "bcryptjs";
 import crypto from "crypto";
-import { User, validate } from "../models/User";
 import Users from "../mock/Users";
+import userValidator from "../helper/userValidator";
 import jwt from "jsonwebtoken";
-
 import _ from "lodash";
 
 /**
  * @Do returning user info excluding sesitive data
- * @return {photo, name}
  */
 exports.me = async (req, res) => {
   const user = _.find(Users, { id: req.user.id });
@@ -16,11 +14,12 @@ exports.me = async (req, res) => {
 };
 
 exports.signUp = async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  const { error } = userValidator(req.body);
+
+  if (error) return res.status(400).send({ message: error.details[0].message });
   // let user = await Users.findOne({ email: req.body.email });
   const user = _.find(Users, { mail: req.body.email });
-  if (user) return res.status(400).send("User already exist.");
+  if (user) return res.status(400).send({ message: "User already exist." });
 
   /**
    * @TODO add action create new user in database here
@@ -36,8 +35,8 @@ exports.signUp = async (req, res) => {
    * @TODO add action saving the user here
    */
   // await user.save();
-  const token = jwt.sign({ id: user.id }, process.env.SECRET);
-  res.header("x-auth-token", token).send(_.pick(user, ["id", "name", "email"]));
+  // const token = jwt.sign({ id: user.id }, process.env.SECRET);
+  // res.header("x-auth-token", token).send(_.pick(user, ["id", "name", "email"]));
   /**
    * @TODO
    * Add a method that will handle the sending of e-mails confirming registration

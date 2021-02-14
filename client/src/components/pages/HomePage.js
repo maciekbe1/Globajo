@@ -15,7 +15,8 @@ export default function Homepage() {
   return (
     <div>
       Homepage Component <button onClick={testNotify}>snackbar</button>
-      <Link to="/signin">Signin</Link>
+      <Link to="/signin">SignIn</Link>
+      <Link to="/signup">SignUp</Link>
       <Modal
         activator={({ setShow }) => (
           <button type="button" onClick={() => setShow(true)}>

@@ -50,8 +50,16 @@ export default function Signin() {
   return (
     <form onSubmit={(e) => signInHandler(e)}>
       <p>test@test.pl / 11111</p>
-      <input type="email" onChange={handleChange("email")} />
-      <input type="password" onChange={handleChange("password")} />
+      <input
+        placeholder="email"
+        type="email"
+        onChange={handleChange("email")}
+      />
+      <input
+        placeholder="password"
+        type="password"
+        onChange={handleChange("password")}
+      />
       {error ? <div>{message}</div> : null}
       {success ? <Link to="/protected">protected</Link> : null}
       {loading ? <div>loading...</div> : <button>Sign in</button>}

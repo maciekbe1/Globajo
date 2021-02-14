@@ -10,3 +10,11 @@ export const signInService = (email, password) => {
 export const getMeService = () => {
   return API.request(`/api/users/me`, null, "get");
 };
+
+export const signUpService = (name, password, email) => {
+  return API.request(`/api/users/signUp`, {
+    name,
+    password,
+    email
+  });
+};

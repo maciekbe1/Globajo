@@ -6,6 +6,8 @@ const ProtectedRoute = lazy(() => import("components/utils/ProtectedRoute"));
 
 const HomePage = lazy(() => import("components/pages/HomePage"));
 const SigninPage = lazy(() => import("components/pages/SigninPage"));
+const SignupPage = lazy(() => import("components/pages/SignupPage"));
+
 const ProtectedTest = lazy(() => import("components/pages/ProtectedTest"));
 const NotFound = lazy(() => import("components/utils/NotFound"));
 
@@ -18,6 +20,7 @@ export default function App() {
         <Layout>
           <Switch>
             <Route path="/" exact component={HomePage} />
+            <Route path="/signup" exact component={SignupPage} />
             <Route path="/signin" exact component={SigninPage} />
             <ProtectedRoute path="/protected" component={ProtectedTest} />
             <RedirectRoute path="/signin" component={SigninPage} />

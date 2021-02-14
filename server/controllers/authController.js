@@ -1,14 +1,13 @@
 import bcryptjs from "bcryptjs";
-// import { User } from "../models/User";
 import Users from "../mock/Users";
 import jwt from "jsonwebtoken";
 
 import _ from "lodash";
-import Joi from "joi";
+import userValidator from "../helper/userValidator";
 
 exports.signIn = async (req, res, next) => {
   try {
-    const { error } = validate(req.body);
+    const { error } = userValidator(req.body);
     if (error)
       return res.status(400).send({ message: error.details[0].message });
     // let user = await User.findOne({ email: req.body.email });
@@ -35,11 +34,3 @@ exports.signIn = async (req, res, next) => {
     next(err);
   }
 };
-
-function validate(req) {
-  const schema = Joi.object({
-    email: Joi.string().min(5).max(50).required().email(),
-    password: Joi.string().min(5).max(1024).required(),
-  });
-  return schema.validate(req);
-}
