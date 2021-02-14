@@ -1,6 +1,7 @@
 import React from "react";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
+import Modal from "../utils/Modal";
 
 export default function Homepage() {
   const { enqueueSnackbar } = useSnackbar();
@@ -15,6 +16,24 @@ export default function Homepage() {
     <div>
       Homepage Component <button onClick={testNotify}>snackbar</button>
       <Link to="/signin">Signin</Link>
+      <Modal
+        activator={({ setShow }) => (
+          <button type="button" onClick={() => setShow(true)}>
+            Otworz modal
+          </button>
+        )}
+      >
+        <ModalContent />
+      </Modal>
     </div>
   );
 }
+
+const ModalContent = ({ setShow }) => {
+  return (
+    <div>
+      <div>Content</div>
+      <button onClick={() => setShow(false)}>Cancel</button>
+    </div>
+  );
+};
