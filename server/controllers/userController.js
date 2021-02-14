@@ -49,7 +49,8 @@ exports.signUp = async (req, res) => {
  */
 exports.verify = async (req, res) => {
   const hash = req.params.hash;
-  const user = await User.findOne({ accountConfirmation: hash });
+  const user = _.find(Users, { accountConfirmation: hash });
+
   if (!user) {
     return res.status(400).send({
       type: "bad-link",
@@ -62,9 +63,9 @@ exports.verify = async (req, res) => {
       message: "This user has already been verified.",
     });
 
-  user.active = true;
-  user.accountConfirmation = "";
-  await user.save();
+  // user.active = true;
+  // user.accountConfirmation = "";
+  // await user.save();
   return res.status(201).json({
     message: "User confirmation successfully.",
   });

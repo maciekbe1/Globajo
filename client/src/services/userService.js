@@ -18,3 +18,7 @@ export const signUpService = (name, password, email) => {
     email
   });
 };
+
+export const verifyService = (hash) => {
+  return API.request(`/api/users/verify/${hash}`);
+};

@@ -7,6 +7,7 @@ const ProtectedRoute = lazy(() => import("components/utils/ProtectedRoute"));
 const HomePage = lazy(() => import("components/pages/HomePage"));
 const SigninPage = lazy(() => import("components/pages/SigninPage"));
 const SignupPage = lazy(() => import("components/pages/SignupPage"));
+const VerifyPage = lazy(() => import("components/pages/VerifyPage"));
 
 const ProtectedTest = lazy(() => import("components/pages/ProtectedTest"));
 const NotFound = lazy(() => import("components/utils/NotFound"));
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/" exact component={HomePage} />
             <Route path="/signup" exact component={SignupPage} />
             <Route path="/signin" exact component={SigninPage} />
+            <Route path="/verify/:hash" exact component={VerifyPage} />
             <ProtectedRoute path="/protected" component={ProtectedTest} />
             <RedirectRoute path="/signin" component={SigninPage} />
             <Route component={NotFound} />
